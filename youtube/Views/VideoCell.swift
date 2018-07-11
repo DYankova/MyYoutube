@@ -19,8 +19,10 @@ class VideoCell : BaseCell {
             setupThumbnailImage()
            
             setupProfileImage()
+            if let channelName = video?.channel?.name,  let number_of_views = video?.number_of_views {
     
-            subTitTextView.text = video?.channel?.name
+            subTitTextView.text = "\(channelName) \(number_of_views)"
+            }
             //TODO fix
             //measure title text
             if let videoTitle = video?.title {
@@ -38,14 +40,14 @@ class VideoCell : BaseCell {
     }
     //to set the video'image - channel url from json
     func setupThumbnailImage()  {
-        if let thumbnailImageUrl = video?.thumnailImageName {
+        if let thumbnailImageUrl = video?.thumbnail_image_name {
       //load image url from json
             thubnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
         }
     }
     //to set the channel'image - chanell url from json
     func setupProfileImage(){
-        if let profileImageUrl = video?.channel?.profileImageName {
+        if let profileImageUrl = video?.channel?.profile_image_name {
           userProfileImageView.loadImageUsingUrlString(urlString: profileImageUrl)
         }
     }

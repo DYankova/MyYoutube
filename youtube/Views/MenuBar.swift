@@ -23,6 +23,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
      let cellId = "cellId"
      let imageNames = ["home","fire","play","user"] //names of icos should be registered
     
+    var homeController: HomeController?
     override init (frame: CGRect){
         super.init(frame: frame)
         
@@ -35,6 +36,38 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         //first tabitem should be selected when app launch
         let selectedIndexPath = NSIndexPath(item: 0, section: 0)
         collectionView.selectItem(at: selectedIndexPath as IndexPath, animated: false, scrollPosition: .bottom)
+        
+        setupHorizontalBar()
+        
+    }
+    var horizontalBarLeftAnchor: NSLayoutConstraint?//it is defined out of the method, because we will use it in another method
+    
+    func setupHorizontalBar() {
+        let horizontalBar = UIView()
+        horizontalBar.backgroundColor = UIColor.white
+        horizontalBar.translatesAutoresizingMaskIntoConstraints = false //important property! without it not showing
+        addSubview(horizontalBar)
+        
+        //set the place and size of the horizontal line bellow the barItems
+        horizontalBarLeftAnchor =  horizontalBar.leftAnchor.constraint(equalTo: self.leftAnchor)
+        horizontalBarLeftAnchor?.isActive = true
+        horizontalBar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        horizontalBar.widthAnchor.constraint(equalTo: self.widthAnchor , multiplier: 1/4).isActive = true
+        horizontalBar.heightAnchor.constraint(equalToConstant: 4).isActive = true
+    }
+    //to move the white line
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        //we need the x value of the barItem to know where to move it when click on barItem
+//        let x = CGFloat(indexPath.item) * frame.width / 4 //1/4 of the entire screen
+//        horizontalBarLeftAnchor?.constant = x //move the left start contraint
+//
+//        //now animate it
+//        UIView.animate(withDuration: 0.75, delay: 0, options: .curveEaseOut, animations: {
+//             self.layoutIfNeeded()
+//        }, completion: nil)
+        
+        //to move the line also when scrolling
+        homeController?.scrollToMenuIndex(menuIndex: indexPath.item	)
     }
     
     

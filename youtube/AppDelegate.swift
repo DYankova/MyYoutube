@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         let layout = UICollectionViewFlowLayout()
+        //make scroll horizontal for scrolling into tabs!!!
+//        layout.scrollDirection = .horizontal
         
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
        

@@ -12,7 +12,7 @@ class MenuCell: BaseCell {
     
     let imageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "home")?.withRenderingMode(.alwaysTemplate)
+        iv.image = UIImage(named: "home")?.withRenderingMode(.alwaysTemplate)//for using tintcolor
 //        iv.tintColor = UIColor.rgb(red: 91, green: 14, blue: 13, alpha: 1)
         return iv
         }()
