@@ -25,6 +25,8 @@
 		279E6C7820ECABCF00D585E6 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E6C7720ECABCF00D585E6 /* MenuBar.swift */; };
 		279E6C7A20ECD18A00D585E6 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E6C7920ECD18A00D585E6 /* MenuCell.swift */; };
 		279E6C7C20ECD1EB00D585E6 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279E6C7B20ECD1EB00D585E6 /* BaseCell.swift */; };
+		27FD35DE20F74C0F00AD9AEE /* VideoLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD35DD20F74C0F00AD9AEE /* VideoLauncher.swift */; };
+		27FD35E020F75C6900AD9AEE /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD35DF20F75C6900AD9AEE /* VideoPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		279E6C7720ECABCF00D585E6 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		279E6C7920ECD18A00D585E6 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		279E6C7B20ECD1EB00D585E6 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		27FD35DD20F74C0F00AD9AEE /* VideoLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLauncher.swift; sourceTree = "<group>"; };
+		27FD35DF20F75C6900AD9AEE /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +69,6 @@
 			isa = PBXGroup;
 			children = (
 				2729D42620ECF00200F0BE4C /* Video.swift */,
-				2729D42820ECF48800F0BE4C /* Channel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -127,9 +130,11 @@
 				279E6C7920ECD18A00D585E6 /* MenuCell.swift */,
 				279E6C7B20ECD1EB00D585E6 /* BaseCell.swift */,
 				2739011220EFEED300348362 /* SettingsCell.swift */,
+				2729D42820ECF48800F0BE4C /* Channel.swift */,
 				2796282620F4D3370066A2F7 /* FeedCell.swift */,
 				2796282820F4E27F0066A2F7 /* TrendingCell.swift */,
 				2796282A20F4E5A80066A2F7 /* SubscriptionCell.swift */,
+				27FD35DF20F75C6900AD9AEE /* VideoPlayerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 			children = (
 				279E6C6020EB67E700D585E6 /* HomeController.swift */,
 				2729D42A20EE3FDB00F0BE4C /* SettingsLauncher.swift */,
+				27FD35DD20F74C0F00AD9AEE /* VideoLauncher.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -217,10 +223,12 @@
 				2796282920F4E27F0066A2F7 /* TrendingCell.swift in Sources */,
 				279E6C6120EB67E700D585E6 /* HomeController.swift in Sources */,
 				2796282720F4D3370066A2F7 /* FeedCell.swift in Sources */,
+				27FD35E020F75C6900AD9AEE /* VideoPlayerView.swift in Sources */,
 				279E6C5F20EB67E700D585E6 /* AppDelegate.swift in Sources */,
 				2739011620F27ACA00348362 /* ApiService.swift in Sources */,
 				279E6C7A20ECD18A00D585E6 /* MenuCell.swift in Sources */,
 				279E6C7120EB6CD200D585E6 /* VideoCell.swift in Sources */,
+				27FD35DE20F74C0F00AD9AEE /* VideoLauncher.swift in Sources */,
 				2796282B20F4E5A80066A2F7 /* SubscriptionCell.swift in Sources */,
 				279E6C7C20ECD1EB00D585E6 /* BaseCell.swift in Sources */,
 				2729D42720ECF00200F0BE4C /* Video.swift in Sources */,
