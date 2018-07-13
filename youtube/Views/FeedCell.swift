@@ -9,11 +9,9 @@
 import UIKit
 
 class FeedCell: BaseCell, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource  {
-    //instantiate new collectionview inside the feedcell
     
     var videos: [Video]?
-    
-    
+    //instantiate new collectionview inside the feedCell
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -25,9 +23,7 @@ class FeedCell: BaseCell, UICollectionViewDelegateFlowLayout, UICollectionViewDe
     }()
     
     let cellId = "cellId"
-    
-    
-    
+
     func fetchVideos(){
         ApiService.sharedInstance.fetchVideos { (videos: [Video]) in
             self.videos = videos
@@ -40,14 +36,12 @@ class FeedCell: BaseCell, UICollectionViewDelegateFlowLayout, UICollectionViewDe
         super.setupViews()
         fetchVideos()
         //represent each 4 section
-        backgroundColor = UIColor.brown
         addSubview(collectionView)
         addConstraintsWithFotmat(format: "H:|[v0]|", views: collectionView)
         addConstraintsWithFotmat(format: "V:|[v0]|", views: collectionView)
         //register the video cell 
         collectionView.register(VideoCell.self, forCellWithReuseIdentifier: cellId)
     }
-    
     
      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //if counts is 0 return 0
@@ -57,9 +51,9 @@ class FeedCell: BaseCell, UICollectionViewDelegateFlowLayout, UICollectionViewDe
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
         cell.video = videos?[indexPath.item] ?? nil
-        
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = (frame.width - 16 - 16 ) * 9 / 16
         return CGSize(width: frame.width, height: height + 16 + 88)
@@ -69,10 +63,9 @@ class FeedCell: BaseCell, UICollectionViewDelegateFlowLayout, UICollectionViewDe
         return 0
     }
     
-//when we tap on videos
+//when we tap on a video
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let videoLauncher = VideoLauncher()
         videoLauncher.showVideoPlayer()
     }
-    
 }

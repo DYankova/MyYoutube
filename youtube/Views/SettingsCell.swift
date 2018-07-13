@@ -10,28 +10,6 @@ import UIKit
 
 class SettingsCell : BaseCell {
     
-    override var isSelected: Bool {
-        didSet {
-            backgroundColor = UIColor.white
-            backgroundColor = isSelected ? UIColor.darkGray : UIColor.white
-            nameLabel.textColor = isSelected ? UIColor.white :  UIColor.black
-            iconImage.tintColor = isSelected ? UIColor.white :  UIColor.black
-        
-        }
-        
-    }
-   
-    var setting: Setting? {
-        didSet {
-            //set to the name of the label - names of the settings (from the [])
-            nameLabel.text = (setting?.name).map { $0.rawValue }
-            if let imageName = setting?.imageName{
-                iconImage.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)//for using tintcolor
-                iconImage.tintColor = UIColor.darkGray
-            }
-        }
-    }
-    
     let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13)
@@ -46,11 +24,31 @@ class SettingsCell : BaseCell {
         return imageView
     }()
     
+    override var isSelected: Bool {
+        didSet {
+            backgroundColor = UIColor.white
+            backgroundColor = isSelected ? UIColor.darkGray : UIColor.white
+            nameLabel.textColor = isSelected ? UIColor.white :  UIColor.black
+            iconImage.tintColor = isSelected ? UIColor.white :  UIColor.black
+        }
+    }
+   
+    var setting: Setting? {
+        didSet {
+            //set to the name of the label - names of the settings objects (from the [])
+            nameLabel.text = (setting?.name).map { $0.rawValue }
+            if let imageName = setting?.imageName{
+                iconImage.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)//for using tintcolor
+                iconImage.tintColor = UIColor.darkGray
+            }
+        }
+    }
+   
     override func setupViews() {
         super.setupViews()
         addSubview(nameLabel)
         addSubview(iconImage)
-        //16 px from v1 which is nameLabel and 8 px right; setting up 30 gives the namaLabel v1 the rest of the cell size
+        //8 px from v1 which is nameLabel and 8 px right; setting up 30 gives the namaLabel v1 the rest of the cell size
         addConstraintsWithFotmat(format: "H:|-8-[v0(30)]-8-[v1]|", views: iconImage , nameLabel)
         addConstraintsWithFotmat(format: "V:|[v0]|", views: nameLabel)
        

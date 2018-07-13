@@ -14,11 +14,18 @@ class VideoPlayerView: UIView {
     var isPlaying = false
     var player: AVPlayer?
     
-    //add spinned into controlscontainerView!!
+    //we create view on the player view to add a s spinner in this view
+    let controlsContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 0, alpha: 1)
+        return view
+    }()
+    
+    //add a spinner(indicator) into controlsContainerView!!
     let activityIndicator: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-        aiv.translatesAutoresizingMaskIntoConstraints = false //we will add it using constraints, thats why it should be set
-        aiv.startAnimating() //animation
+        aiv.translatesAutoresizingMaskIntoConstraints = false
+        aiv.startAnimating()
         return aiv
     }()
     
@@ -29,29 +36,11 @@ class VideoPlayerView: UIView {
         btn.setImage(image, for: .normal)
         btn.tintColor = UIColor.white
         btn.isHidden = true //it should be shown after video is loaded
-        btn.addTarget(self, action: #selector(handlePause), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(handlePauseOrPlay), for: .touchUpInside)
         return btn
     }()
    
-   @objc func handlePause(){
-     if isPlaying {
-       player?.pause()
-       pausePlayButton.setImage(UIImage(named: "play_btn"), for: .normal)
-     } else {
-       player?.play()
-       pausePlayButton.setImage(UIImage(named: "pause_btn"), for: .normal)
-     }
-      isPlaying = !isPlaying
-}
-    
-    //we create view above the player to add a s spinner in this view
-    let controlsContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(white: 0, alpha: 1)
-        return view
-    }()
-    
-    lazy var videoslider: UISlider = {
+    lazy var videoSlider: UISlider = { //red point on the videoSlider
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.minimumTrackTintColor = UIColor.red
@@ -60,7 +49,7 @@ class VideoPlayerView: UIView {
         slider.addTarget(self, action: #selector(handleSliderChande), for: .valueChanged) //when click smwhere on the slider
         return slider
     }()
-    
+    //right
     let videoLengthLabel: UILabel = {
         let label = UILabel()
         label.text = "00:00:00"
@@ -70,24 +59,32 @@ class VideoPlayerView: UIView {
         label.textAlignment = .right
         return label
     }()
-    
+    //left
     let currentTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "00:00:00"
         label.textColor = UIColor.white
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
-
         return label
     }()
     
+    @objc func handlePauseOrPlay(){
+        if isPlaying {
+            player?.pause()
+            pausePlayButton.setImage(UIImage(named: "play_btn"), for: .normal)
+        } else {
+            player?.play()
+            pausePlayButton.setImage(UIImage(named: "pause_btn"), for: .normal)
+        }
+        isPlaying = !isPlaying
+    }
     
    @objc func handleSliderChande() {
-    
     if let duration = player?.currentItem?.duration {
         let totalSeconds = CMTimeGetSeconds(duration)
-        let value = Float64(videoslider.value) * totalSeconds
-        let seekTime  = CMTime(value: Int64(value), timescale: 1)
+        let value = Float64(videoSlider.value) * totalSeconds
+        let seekTime  = CMTime(value: Int64(value), timescale: 1) //change on every second
         player?.seek(to: seekTime, completionHandler: { (completedSeek) in
         })
      }
@@ -96,7 +93,6 @@ class VideoPlayerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupPlayerView()
-        
         setupGradientLayer()
         
         controlsContainerView.frame = frame
@@ -124,11 +120,11 @@ class VideoPlayerView: UIView {
         currentTimeLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         currentTimeLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
-        controlsContainerView.addSubview(videoslider)
-        videoslider.rightAnchor.constraint(equalTo: videoLengthLabel.leftAnchor).isActive = true
-        videoslider.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        videoslider.leftAnchor.constraint(equalTo: currentTimeLabel.rightAnchor).isActive = true//starts just after it
-        videoslider.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        controlsContainerView.addSubview(videoSlider)
+        videoSlider.rightAnchor.constraint(equalTo: videoLengthLabel.leftAnchor).isActive = true
+        videoSlider.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        videoSlider.leftAnchor.constraint(equalTo: currentTimeLabel.rightAnchor).isActive = true //starts just after currentTimeLabel
+        videoSlider.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         backgroundColor = UIColor.black //before video loaded
     }
@@ -144,11 +140,12 @@ class VideoPlayerView: UIView {
                 self.layer.addSublayer(playerLayer)
                 playerLayer.frame = self.frame //take the whole frame
                 player?.play()
+                
                 //just when the video is ready to be run and rendering frames
                 player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
                 
                 //track the time progress of the video
-                let interval = CMTime(value: 1, timescale: 2)
+                let interval = CMTime(value: 1, timescale: 2) //on every 1 second
                 player?.addPeriodicTimeObserver(forInterval: interval, queue:  DispatchQueue.main, using: { (progressTime) in
                     let seconds = CMTimeGetSeconds(progressTime)
                     let secondsTillMin =  seconds < 60 ? seconds : seconds - 60 * (seconds / 60)
@@ -157,28 +154,24 @@ class VideoPlayerView: UIView {
                     self.currentTimeLabel.text = "\(minutesString):\(secondsString)"
                     
                     //move the slider of the video
-                    
                     if let duration = self.player?.currentItem?.duration {
-                        let durationSeconds = CMTimeGetSeconds(duration )
-                        self.videoslider.value = Float(seconds / durationSeconds)
+                        let durationSeconds = CMTimeGetSeconds(duration)
+                        self.videoSlider.value = Float(seconds / durationSeconds) //progress of the video
                     }
                 })
             }
         }
     
-         //just when the video is ready to be run and rendering frames
+    //just when the video is ready to be run and rendering frames
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "currentItem.loadedTimeRanges" {
             pausePlayButton.isHidden = false
             isPlaying = true
             activityIndicator.stopAnimating() //when the video is loaded remove the spinner
             controlsContainerView.backgroundColor = UIColor.clear//remove the black color
-
+         //set videoLengthLabel - the whole video duration
             if let duration = player?.currentItem?.duration {
               let seconds = CMTimeGetSeconds(duration)
-            
-               //to make it in mins
-              
               let secondsText = String(format: "%02d", seconds - (seconds / 60) * 60)
               let  minutesText = String(format: "%02d", Int(seconds) / 60)
               videoLengthLabel.text = "\(minutesText): \(secondsText)"
@@ -194,7 +187,6 @@ class VideoPlayerView: UIView {
             gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor ]
             controlsContainerView.layer.addSublayer(gradientLayer)
         }
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

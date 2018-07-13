@@ -7,17 +7,7 @@
 //
 
 import UIKit
-//model object of the settings
-class Setting {
-    let name: SettingName
-    let imageName: String
-    
-    //to initialize name, imageName
-    init(name: SettingName, imageName: String) {
-        self.imageName = imageName
-        self.name = name
-    }
-}
+
 //we use enum to prevent bugs if we change name of the settings
 enum SettingName: String {
     case Cancel = "Cancel"
@@ -28,11 +18,11 @@ enum SettingName: String {
     case SwitchAccount = "Switch account"
 }
 
-
 class SeetingsLauncher: NSObject, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
 //blackView is outside the method, because I will use it also in dismiss method
-let blackView = UIView()
+    var homeController: HomeController?
+    let blackView = UIView()
     
   //block for items in settings box
     let collectionView: UICollectionView = {
@@ -56,33 +46,27 @@ let blackView = UIView()
                 helpSetting, switchSetting, cancelSetting]
     }()
     
-    var homeController: HomeController?
-    
 func showSettings() {
     //desect all items, selected before
-    if let indexPaths = collectionView.indexPathsForSelectedItems {
-        indexPaths.forEach { self.collectionView.deselectItem(at: $0, animated: false) }
-    }
-    
+      if let indexPaths = collectionView.indexPathsForSelectedItems {
+          indexPaths.forEach { self.collectionView.deselectItem(at: $0, animated: false) }
+      }
     //show menu
     //this is the entire app view
     if let window = UIApplication.shared.keyWindow {
-
         //transperant color
         blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
-        //when u click somewhere on the sceen (the whole blackView)
+        //when user clicks somewhere on the screen
         blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
         
         window.addSubview(blackView)
         window.addSubview(collectionView)
-        //the size of the settings box
-        //it should be with the height of the settings count x cellheight
-        let height: CGFloat = CGFloat(settings.count) * cellHeight
+        
+        //the size of the settings box :
+        let height: CGFloat = CGFloat(settings.count) * cellHeight //defined as 50
         let y = window.frame.height - height
         collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
-    
-        blackView.frame = window.frame
-        
+        blackView.frame = window.frame //entire screen
         //blackView.alpha is becoming from 0 to 1 with animation
         blackView.alpha = 0
         //for smoothing animation :.curveEaseOut
@@ -92,11 +76,10 @@ func showSettings() {
         }, completion: nil)
     }
 }
- //when click outside
+    
   @objc func handleDismiss(){
     UIView.animate(withDuration: 0.5) {
         self.blackView.alpha = 0
-        
         if let window = UIApplication.shared.keyWindow {
             //the setting box hides smoothly down
             self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
@@ -109,16 +92,19 @@ func showSettings() {
         return settings.count
     }
     
+    //set a Setting object to settinsCell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SettingsCell
-        let setting = settings[indexPath.item]//indexpath representing the row
+        let setting = settings[indexPath.item]//indexpath represents the row
         cell.setting = setting
         return cell
     }
+    
     //show size of the collectionview cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: cellHeight) //50
     }
+    
     //minimes the spacing btw cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
@@ -126,8 +112,7 @@ func showSettings() {
     
 //when click on setting
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        //to dissmiss immediatelly when click
+        //to dissmiss when click
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
             self.blackView.alpha = 0
             if let window = UIApplication.shared.keyWindow {
@@ -135,10 +120,8 @@ func showSettings() {
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
             }
         }, completion: nil)
-           
-    //when dismissal is completed show settings controller
-        //which setting to show
-        let setting = self.settings[indexPath.item]
+        //when dismissal is completed show settings controller
+        let setting = self.settings[indexPath.item]//which setting to show
         if setting.name != .Cancel {
              self.homeController?.showControllerForSetting(setting: setting) //for cancel the controller not show
         }
@@ -149,7 +132,7 @@ func showSettings() {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        //we should register the cell
+        //we should register the cell in init method!!
         collectionView.register(SettingsCell.self, forCellWithReuseIdentifier: cellId)
     }
   }

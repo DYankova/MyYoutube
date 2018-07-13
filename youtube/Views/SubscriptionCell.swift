@@ -9,7 +9,7 @@
 import UIKit
 
 class SubscriptionCell: FeedCell {
-    //we need differend feed for different tabs
+   
     override func fetchVideos() {
         ApiService.sharedInstance.fetchSubscriptionsFeed { (videos) in
             self.videos = videos

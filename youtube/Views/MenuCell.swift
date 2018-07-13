@@ -17,13 +17,7 @@ class MenuCell: BaseCell {
         return iv
         }()
     
-    override var isHighlighted: Bool{
-        didSet {
-            imageView.tintColor =   isHighlighted ? UIColor.white : UIColor.rgb(red: 91, green: 14, blue: 13, alpha: 1)
-            }
-    }
-    
-    override var isSelected: Bool{
+    override var isSelected: Bool {
         didSet {
             imageView.tintColor =   isSelected ? UIColor.white : UIColor.rgb(red: 91, green: 14, blue: 13, alpha: 1)
         }
@@ -39,11 +33,5 @@ class MenuCell: BaseCell {
         //in order to center the image itself
         addConstraint(NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
-
-        
     }
-    
-
 }
-
-

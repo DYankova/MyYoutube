@@ -14,14 +14,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     let cellId = "cellId"
     let trendingCellId = "trendingCellId"
     let subscriptionCellId = "subscriptionCellId"
-    let titles = ["Home","Trending","Subscriptions","Accounts"]
+    let titles = ["Home","Trending","Subscriptions","Accounts"]//for the settings Bar
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationController?.navigationBar.isTranslucent = false
         
-        //to be able to change title position set a label
+        //to be able to change title position - set a label
         let titleViewLbl = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
         navigationItem.titleView = titleViewLbl
         titleViewLbl.text = "Home"
@@ -44,25 +44,27 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingCellId)
-         collectionView?.register(SubscriptionCell.self, forCellWithReuseIdentifier: subscriptionCellId)
+        collectionView?.register(SubscriptionCell.self, forCellWithReuseIdentifier: subscriptionCellId)
         
         //to scroll the view under the nav bar
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
         
-        //when scroll to be into pages
+        //when scroll to be into pages 1, 2, 3, 4
         collectionView?.isPagingEnabled = true
     }
       func  setupNavBarButtons() {
-        let searchImage = UIImage(named: "search-")?.withRenderingMode(.alwaysOriginal)
-        let searchBarButtonItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch))
+        //as we still don't have functionality for search
+//        let searchImage = UIImage(named: "search-")?.withRenderingMode(.alwaysOriginal)
+//        let searchBarButtonItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch))
         
         let moreImage = UIImage(named: "more")?.withRenderingMode(.alwaysOriginal)
         let moreButton = UIBarButtonItem(image: moreImage, style: .plain, target: self, action: #selector(handleMoreButton))
        
-        navigationItem.rightBarButtonItems = [moreButton, searchBarButtonItem]
+//        navigationItem.rightBarButtonItems = [moreButton, searchBarButtonItem]
+          navigationItem.rightBarButtonItems = [moreButton]
     }
-    //lazy var instantiation runs once if the var is nil
+
     lazy var settingsLauncher: SeetingsLauncher = {
         let settingsLauncher = SeetingsLauncher()
         //instantiate the homecontroller just once to be able to use it in the SettingsLauncherController
@@ -71,9 +73,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }()
     
     @objc func handleSearch() {
- 
-        
-        
+ // add functionality
     }
 
     func scrollToMenuIndex(menuIndex: Int) {
@@ -87,15 +87,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         settingsLauncher.homeController = self
         //show menu
         settingsLauncher.showSettings()
-    
     }
-    //open new dummycontroller
+    //open new dummycontroller for a setting
     func showControllerForSetting(setting: Setting){
         let dummySettingsViewController = UIViewController()
         dummySettingsViewController.view.backgroundColor = UIColor.white
         dummySettingsViewController.navigationItem.title = setting.name.rawValue //name of navItem
         navigationController?.navigationBar.tintColor = UIColor.white
-        //TODO change color to white, here is not correct
         navigationController?.navigationBar.titleTextAttributes = [kCTForegroundColorAttributeName : UIColor.white] as [NSAttributedStringKey : Any]
         navigationController?.pushViewController(dummySettingsViewController, animated: true)
     }
@@ -108,8 +106,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     //in a block
    lazy var menuBar: MenuBar = {
-        let mb = MenuBar()//cell\
-        mb.homeController = self // we need to make homeController point to self in order not to ne nil in MenuBar
+        let mb = MenuBar()//cell
+        mb.homeController = self // we need to make homeController point to self in order not to ne nil in MenuBar class
         return mb
     }()
     
@@ -119,7 +117,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         //not to have gap after scrolling we put a red uiview on the whole bar
         let redView = UIView()
         redView.backgroundColor = UIColor.rgb(red: 230, green: 32 , blue: 31, alpha: 1)
-        view.addSubview(redView)
+        view.addSubview(redView)//under menubar
         view.addConstraintsWithFotmat(format: "H:|[v0]|", views: redView)
         view.addConstraintsWithFotmat(format: "V:[v0(50)]", views: redView)
         view.addSubview(menuBar)
@@ -140,9 +138,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         //targetContentOffset.pointee.x is 0 ; 375 ; 750 ; 1150
         
         let index = targetContentOffset.pointee.x / view.frame.width
-        
         let indexPath =  NSIndexPath(item: Int(index), section: 0)
-        
         //we have the index where should be selected
         menuBar.collectionView.selectItem(at: indexPath as IndexPath, animated: true, scrollPosition: .centeredHorizontally)
         
@@ -155,8 +151,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     //chose which cell for which tab!
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let identifier: String
+        //4 is like 1
         if indexPath.item == 1 {
             identifier = trendingCellId
         } else if indexPath.item == 2 {

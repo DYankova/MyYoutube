@@ -9,7 +9,7 @@
 import UIKit
 
 class TrendingCell: FeedCell {
-    //we need differend feed for different tabs
+
     override func fetchVideos() {
         ApiService.sharedInstance.fetchTrendingFeed { (videos) in
             self.videos = videos

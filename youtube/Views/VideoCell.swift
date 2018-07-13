@@ -17,13 +17,10 @@ class VideoCell : BaseCell {
         didSet {
             titleLable.text = video?.title
             setupThumbnailImage()
-           
             setupProfileImage()
             if let channelName = video?.channel?.name,  let number_of_views = video?.number_of_views {
-    
-            subTitTextView.text = "\(channelName) \(number_of_views)"
+               subTitTextView.text = "\(channelName) .\(number_of_views)"
             }
-            //TODO fix
             //measure title text
             if let videoTitle = video?.title {
                 //spacings + size of title on 2 lines
@@ -41,8 +38,8 @@ class VideoCell : BaseCell {
     //to set the video'image - channel url from json
     func setupThumbnailImage()  {
         if let thumbnailImageUrl = video?.thumbnail_image_name {
-      //load image url from json
-            thubnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
+       //load image url from json
+            thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
         }
     }
     //to set the channel'image - chanell url from json
@@ -52,13 +49,11 @@ class VideoCell : BaseCell {
         }
     }
     
-    
-    let thubnailImageView: CustomImageView = {
+    let thumbnailImageView: CustomImageView = {
         let imageView = CustomImageView()
         //the image to fill good in the frame
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-       //set image in video object
         return imageView
     }()
     
@@ -70,25 +65,22 @@ class VideoCell : BaseCell {
         return imageView
     }()
     
-    
     let separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 230/255, green : 230/255, blue:230/255, alpha :1)
         return view
     }()
     
-
     let titleLable: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-       //set title in video object
         label.numberOfLines = 2
         return label
     }()
     
     let subTitTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "DIY channel"
+        textView.text = "DIY channel" //just an example
         textView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)
         textView.textColor = UIColor.darkGray
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -98,50 +90,45 @@ class VideoCell : BaseCell {
     var titleLblHeightConstrain: NSLayoutConstraint?
     
     override func setupViews(){
-        addSubview(thubnailImageView)
+        addSubview(thumbnailImageView)
         addSubview(separatorView)
         addSubview(userProfileImageView)
         addSubview(titleLable)
         addSubview(subTitTextView)
         
-        addConstraintsWithFotmat(format: "H:|-16-[v0]-16-|", views: thubnailImageView)
+        addConstraintsWithFotmat(format: "H:|-16-[v0]-16-|", views: thumbnailImageView)
         //high constraints
-        addConstraintsWithFotmat(format:  "V:|-16-[v0]-8-[v1(44)]-36-[v2(1)]|",  views: thubnailImageView,userProfileImageView, separatorView)
+        addConstraintsWithFotmat(format:  "V:|-16-[v0]-8-[v1(44)]-36-[v2(1)]|",  views: thumbnailImageView,userProfileImageView, separatorView)//v0,v1,v2
        
         addConstraintsWithFotmat(format: "H:|-16-[v0(44)]|",   views: userProfileImageView)
         
         addConstraintsWithFotmat(format: "H:|[v0]|",   views: separatorView)
         
-       addConstraintsWithFotmat(format: "H:|[v0]|",   views: separatorView)
+        addConstraintsWithFotmat(format: "H:|[v0]|",   views: separatorView)
         
         //left cons
         addConstraint(NSLayoutConstraint(item: titleLable, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
         //right cons
-        addConstraint(NSLayoutConstraint(item: titleLable, attribute: .right, relatedBy: .equal, toItem: thubnailImageView, attribute: .right, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: titleLable, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
         //top constraints
-        //the titlelable is top-equal to the thubnailImageView
-        addConstraint(NSLayoutConstraint(item: titleLable, attribute: .top, relatedBy: .equal, toItem: thubnailImageView, attribute: .bottom, multiplier: 1, constant: 8))
+        //the titlelable is top-equal to the thumbnailImageView
+        addConstraint(NSLayoutConstraint(item: titleLable, attribute: .top, relatedBy: .equal, toItem: thumbnailImageView, attribute: .bottom, multiplier: 1, constant: 8))
         //hight cons
         
         titleLblHeightConstrain = NSLayoutConstraint(item: titleLable, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 44)
         addConstraint(titleLblHeightConstrain!)
         
-        
         //left cons
         addConstraint(NSLayoutConstraint(item: subTitTextView, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
         //right cons
-        addConstraint(NSLayoutConstraint(item: subTitTextView, attribute: .right, relatedBy: .equal, toItem: thubnailImageView, attribute: .right, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: subTitTextView, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
         //top constraints
         //the titlelable is top-equal to the thubnailImageView
         addConstraint(NSLayoutConstraint(item: subTitTextView, attribute: .top, relatedBy: .equal, toItem: titleLable, attribute: .bottom, multiplier: 1, constant: 4))
         //hight cons
         addConstraint(NSLayoutConstraint(item: subTitTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
         
-        thubnailImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        thumbnailImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
     }
-    
-
- 
-    
 }
 
