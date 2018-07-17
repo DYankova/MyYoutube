@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
    
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -29,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
        
-        
         UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 230, green: 32 , blue: 31, alpha: 1)
 //         UINavigationBar.appearance().barTintColor = UIColor.green
         // get rid of the black bar underneath the nav bar
@@ -40,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let statusBarBackgroundView = UIView()
         statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 184, green: 21 , blue: 21, alpha: 1)
-        
         
         window?.addSubview(statusBarBackgroundView)
         window?.addConstraintsWithFotmat(format: "H:|[v0]|", views: statusBarBackgroundView)

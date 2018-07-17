@@ -20,8 +20,11 @@ class VideoLauncher: NSObject { //if we have NSobject we dont have access to any
             let height = keyWindow.frame.width * 9 / 16
             let videoPlayerFrame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
             let videoPlayerView = VideoPlayerView(frame: videoPlayerFrame)
+            let backButton = BackButtonView(frame:  CGRect(x: 0, y: height, width: keyWindow.frame.width, height: height - 200))
             
             view.addSubview(videoPlayerView) //open the video
+            view.addSubview(backButton)
+            
             keyWindow.addSubview(view)
         
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {

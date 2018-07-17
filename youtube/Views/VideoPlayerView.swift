@@ -131,7 +131,7 @@ class VideoPlayerView: UIView {
     
     //we add the exact player
         func setupPlayerView() {
-            let urlString = "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
+            let urlString = "https://s3-eu-west-1.amazonaws.com/diditube/birds.mp4"
             //make url from string
             if let url = NSURL(string: urlString) {
                 player = AVPlayer(url: url as URL)
@@ -172,8 +172,8 @@ class VideoPlayerView: UIView {
          //set videoLengthLabel - the whole video duration
             if let duration = player?.currentItem?.duration {
               let seconds = CMTimeGetSeconds(duration)
-              let secondsText = String(format: "%02d", seconds - (seconds / 60) * 60)
-              let  minutesText = String(format: "%02d", Int(seconds) / 60)
+                let secondsText = seconds > 60 ? String(format: "%02d", seconds - (seconds / 60) * 60) : String( Int(seconds))
+                let  minutesText = String(format: "%02d", Int(seconds) / 60)
               videoLengthLabel.text = "\(minutesText): \(secondsText)"
             }
         }

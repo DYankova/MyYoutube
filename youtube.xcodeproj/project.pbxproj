@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270E3CE220FDEC64001FC2F4 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270E3CE120FDEC64001FC2F4 /* BackButton.swift */; };
 		2729D42420ECE7C100F0BE4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2729D42320ECE7C100F0BE4C /* Assets.xcassets */; };
 		2729D42720ECF00200F0BE4C /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2729D42620ECF00200F0BE4C /* Video.swift */; };
 		2729D42920ECF48800F0BE4C /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2729D42820ECF48800F0BE4C /* Channel.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		270E3CE120FDEC64001FC2F4 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		2729D42320ECE7C100F0BE4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2729D42620ECF00200F0BE4C /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		2729D42820ECF48800F0BE4C /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				2796282820F4E27F0066A2F7 /* TrendingCell.swift */,
 				2796282A20F4E5A80066A2F7 /* SubscriptionCell.swift */,
 				27FD35DF20F75C6900AD9AEE /* VideoPlayerView.swift */,
+				270E3CE120FDEC64001FC2F4 /* BackButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				279E6C6120EB67E700D585E6 /* HomeController.swift in Sources */,
 				2796282720F4D3370066A2F7 /* FeedCell.swift in Sources */,
 				27FD35E020F75C6900AD9AEE /* VideoPlayerView.swift in Sources */,
+				270E3CE220FDEC64001FC2F4 /* BackButton.swift in Sources */,
 				273885BB20F8C45A00E66FE1 /* SafeJsonValue.swift in Sources */,
 				279E6C5F20EB67E700D585E6 /* AppDelegate.swift in Sources */,
 				2739011620F27ACA00348362 /* ApiService.swift in Sources */,
