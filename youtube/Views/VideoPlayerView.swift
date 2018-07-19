@@ -14,6 +14,12 @@ class VideoPlayerView: UIView {
     var isPlaying = false
     var player: AVPlayer?
     
+    let videoURLs = ["https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                     "https://s3-eu-west-1.amazonaws.com/diditube/birds.mp4",
+                     "https://s3-eu-west-1.amazonaws.com/diditube/bottle.mp4",
+                     "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4",
+                     "https://s3-eu-west-1.amazonaws.com/diditube/snow.mp4" ]
+    
     //we create view on the player view to add a s spinner in this view
     let controlsContainerView: UIView = {
         let view = UIView()
@@ -69,6 +75,37 @@ class VideoPlayerView: UIView {
         return label
     }()
     
+    lazy var backButton: UIButton = {
+        let btn  = UIButton(type: .system)
+        let image = UIImage(named: "back")
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setImage(image, for: .normal)
+        btn.tintColor = UIColor.red
+        btn.addTarget(self, action: #selector(backButtonPresed), for: .touchUpInside)
+        return btn
+    }()
+    
+    @objc func backButtonPresed(){
+
+        player?.pause()
+        player = nil
+        //TODO make smooth animation
+        let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
+        _ = appDelegate?.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
+        
+        UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 230, green: 32 , blue: 31, alpha: 1)
+        
+        // get rid of the black bar underneath the nav bar
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+       
+        let statusBarBackgroundView = UIView()
+        statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 184, green: 21 , blue: 21, alpha: 1)
+        
+        window?.addSubview(statusBarBackgroundView)
+        window?.addConstraintsWithFotmat(format: "H:|[v0]|", views: statusBarBackgroundView)
+        window?.addConstraintsWithFotmat(format: "V:|[v0(20)]", views: statusBarBackgroundView)
+    }
     @objc func handlePauseOrPlay(){
         if isPlaying {
             player?.pause()
@@ -92,11 +129,13 @@ class VideoPlayerView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupPlayerView()
+//        setupPlayerView(index: videoURLs) //set it when initialize videoplayer
+        
         setupGradientLayer()
         
         controlsContainerView.frame = frame
         addSubview(controlsContainerView)
+        controlsContainerView.addSubview(backButton)
         
         controlsContainerView.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true //center it
@@ -105,8 +144,8 @@ class VideoPlayerView: UIView {
         controlsContainerView.addSubview(pausePlayButton)
         pausePlayButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         pausePlayButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        pausePlayButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        pausePlayButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        pausePlayButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        pausePlayButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         controlsContainerView.addSubview(videoLengthLabel)
         videoLengthLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
@@ -127,11 +166,20 @@ class VideoPlayerView: UIView {
         videoSlider.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         backgroundColor = UIColor.black //before video loaded
+        
+        backButton.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        addSubview(backButton)
+        backButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
+        backButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     //we add the exact player
-        func setupPlayerView() {
-            let urlString = "https://s3-eu-west-1.amazonaws.com/diditube/birds.mp4"
+    func setupPlayerView(index: Int) {
+        
+           let urlString =  index >= videoURLs.count ? videoURLs[1] :   videoURLs[index]
+    
             //make url from string
             if let url = NSURL(string: urlString) {
                 player = AVPlayer(url: url as URL)

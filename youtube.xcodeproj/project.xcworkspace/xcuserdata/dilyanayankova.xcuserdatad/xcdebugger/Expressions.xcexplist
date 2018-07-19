@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "BackButtonView.backButtonPresed():BackButton.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "videoPlayer">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "VideoCell.video.didset:VideoCell.swift">
          <PersistentStrings>
             <PersistentString

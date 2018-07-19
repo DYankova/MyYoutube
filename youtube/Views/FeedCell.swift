@@ -66,6 +66,6 @@ class FeedCell: BaseCell, UICollectionViewDelegateFlowLayout, UICollectionViewDe
 //when we tap on a video
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let videoLauncher = VideoLauncher()
-        videoLauncher.showVideoPlayer()
+        videoLauncher.showVideoPlayer(index: indexPath.item)
     }
 }

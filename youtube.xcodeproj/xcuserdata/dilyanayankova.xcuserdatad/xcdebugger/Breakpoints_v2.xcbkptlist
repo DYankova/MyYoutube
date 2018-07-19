@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "youtube/Views/MenuBar.swift"
-            timestampString = "553180283.495766"
+            timestampString = "553681736.7591619"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "youtube/Controllers/HomeController.swift"
-            timestampString = "553515688.47709"
+            timestampString = "553687229.050809"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "128"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "youtube/Views/MenuBar.swift"
-            timestampString = "553180283.4958659"
+            timestampString = "553681736.7592829"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "youtube/Controllers/HomeController.swift"
-            timestampString = "553515688.477204"
+            timestampString = "553687229.050982"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "80"
@@ -138,13 +138,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "youtube/Views/VideoPlayerView.swift"
-            timestampString = "553515688.4772511"
+            timestampString = "553687229.051037"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "VideoPlayerView"
-            landmarkType = "3">
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "setupPlayerView(index:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "youtube/Views/VideoPlayerView.swift"
-            timestampString = "553515688.4772969"
+            timestampString = "553687229.05108"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "setupGradientLayer()"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "youtube/Views/VideoPlayerView.swift"
-            timestampString = "553515688.477336"
+            timestampString = "553687229.0511169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "observeValue(forKeyPath:of:change:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "youtube/Views/VideoPlayerView.swift"
-            timestampString = "553515688.477374"
+            timestampString = "553687229.051154"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "observeValue(forKeyPath:of:change:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "youtube/Views/VideoPlayerView.swift"
-            timestampString = "553515688.477412"
+            timestampString = "553687229.051191"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "observeValue(forKeyPath:of:change:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,12 +218,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "youtube/Views/VideoPlayerView.swift"
-            timestampString = "553515688.47745"
+            timestampString = "553687229.0512249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "setupPlayerView()"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "setupPlayerView(index:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -234,44 +234,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "youtube/Views/VideoPlayerView.swift"
-            timestampString = "553515688.477487"
+            timestampString = "553687229.051258"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "setupPlayerView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "youtube/Views/BackButton.swift"
-            timestampString = "553515688.477528"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "backButtonPresed()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "youtube/Views/FeedCell.swift"
-            timestampString = "553512841.098883"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "collectionView(_:didSelectItemAt:)"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "setupPlayerView(index:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -282,28 +250,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "youtube/AppDelegate.swift"
-            timestampString = "553515688.477859"
+            timestampString = "553699216.085188"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
             endingLineNumber = "29"
             landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "youtube/Views/BackButton.swift"
-            timestampString = "553515688.477906"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "backButtonPresed()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

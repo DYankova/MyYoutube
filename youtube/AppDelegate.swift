@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
        
         UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 230, green: 32 , blue: 31, alpha: 1)
-//         UINavigationBar.appearance().barTintColor = UIColor.green
+
         // get rid of the black bar underneath the nav bar
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)

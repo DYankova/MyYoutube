@@ -23,15 +23,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         //to be able to change title position - set a label
         let titleViewLbl = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
-        navigationItem.titleView = titleViewLbl
         titleViewLbl.text = "Home"
         titleViewLbl.textColor = UIColor.white
         titleViewLbl.font = UIFont.systemFont(ofSize: 20)
+        navigationItem.titleView = titleViewLbl
         
         setupCollectionView()
         //menubar + navigationbar (navigationItem)
-        setupMenuBar()//up
-        setupNavBarButtons()//down
+        setupMenuBar()//down
+        setupNavBarButtons()//up
     }
     
     func setupCollectionView(){
@@ -60,9 +60,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         let moreImage = UIImage(named: "more")?.withRenderingMode(.alwaysOriginal)
         let moreButton = UIBarButtonItem(image: moreImage, style: .plain, target: self, action: #selector(handleMoreButton))
-       
 //        navigationItem.rightBarButtonItems = [moreButton, searchBarButtonItem]
-          navigationItem.rightBarButtonItems = [moreButton]
+        navigationItem.rightBarButtonItem = moreButton
+        
     }
 
     lazy var settingsLauncher: SeetingsLauncher = {
